@@ -1,0 +1,215 @@
+:root {
+  /* Base theme (light mode) */
+  --bg: hsl(210, 13%, 91%);
+  --text: hsl(0, 0%, 15%);
+  --active-text: hsl(0, 0%, 47%);
+  --muted: hsl(0, 0%, 67%);
+  --accent: hsl(239, 85%, 67%);
+  --slash: hsl(0, 0%, 13%);
+  --shadow-color-dark: hsl(210, 7%, 79%);
+  --shadow-color-light: hsl(0, 0%, 100%);
+  --glass-stroke: hsla(0, 0%, 100%, 0.2);
+  --border-color: hsla(0, 0%, 100%, 0);
+  --hover-bg: hsla(0, 0%, 100%, 0.3);
+
+  /* Dark theme overrides */
+  --bg-dark: hsl(240, 2%, 13%);
+  --text-dark: hsl(0, 0%, 90%);
+  --active-text-dark: hsl(0, 0%, 63%);
+  --muted-dark: hsl(0, 0%, 42%);
+  --accent-dark: hsl(239, 100%, 74%);
+  --slash-dark: hsl(239, 100%, 74%);
+  --shadow-color-dark-dark: hsla(0, 0%, 0%, 0.7);
+  --shadow-color-light-dark: hsla(0, 0%, 100%, 0.07);
+  --glass-stroke-dark: hsla(0, 0%, 100%, 0);
+  --hover-bg-dark: hsla(0, 0%, 20%, 0.5);
+
+  /* Animation properties */
+  --animation-duration-long: 1.8s;
+  --animation-duration-short: 0.3s;
+  --animation-smoothness: cubic-bezier(0, 1.5, 0.31, 0.8);
+  --animation-long: var(--animation-duration-long) var(--animation-smoothness);
+  --animation-short: var(--animation-duration-short) var(--animation-smoothness);
+
+  /* Font */
+  font-family: 'Helvetica Neue', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+}
+
+[data-theme='dark'] {
+  --bg: var(--bg-dark);
+  --text: var(--text-dark);
+  --active-text: var(--active-text-dark);
+  --muted: var(--muted-dark);
+  --accent: var(--accent-dark);
+  --slash: var(--slash-dark);
+  --shadow-color-dark: var(--shadow-color-dark-dark);
+  --shadow-color-light: var(--shadow-color-light-dark);
+  --glass-stroke: var(--glass-stroke-dark);
+  --hover-bg: var(--hover-bg-dark);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  gap: 32px;
+  padding: 20px;
+}
+
+#logo-container {
+  position: relative;
+  width: 300px;
+  height: 150px;
+  max-width: 80vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#tyler-text {
+  position: absolute;
+  font-size: 5rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  transform-origin: top;
+  color: var(--text);
+}
+
+.left-part {
+  margin-right: 2px;
+  display: inline-block;
+  transition: transform var(--animation-long);
+  transform: translateX(0);
+}
+
+.right-part {
+  margin-left: 3px;
+  display: inline-block;
+  transition: transform var(--animation-long);
+  transform: translateX(0);
+}
+
+#slash {
+  position: absolute;
+  font-weight: bold;
+  margin-left: -13px;
+  transform: scale(0) translateY(-20px) translatex(30px);
+  transform-origin: top;
+  transition: transform var(--animation-duration-short)
+    cubic-bezier(0, 1.29, 0.72, 0.93);
+  z-index: 2;
+  -webkit-text-stroke: 2px var(--text);
+}
+
+.animate .left-part {
+  transform: translateX(-11px) translateY(0px);
+}
+
+.animate .right-part {
+  transform: translateX(11px) translateY(0px);
+}
+
+.animate #slash {
+  transform: scale(1) translateY(0) translatex(0);
+}
+
+#main-tiles {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.button {
+  cursor: pointer;
+  display: flex;
+  padding: 12px;
+  background-color: var(--bg);
+  color: var(--muted);
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 50px;
+  transition: all var(--animation-long);
+}
+
+.button-raised {
+  background-color: var(--hover-bg);
+  color: var(--muted);
+}
+
+.button:hover {
+  color: var(--text);
+  box-shadow: 5px 5px 10px var(--shadow-color-dark),
+    -5px -5px 10px var(--shadow-color-light);
+}
+
+.button.active {
+  color: var(--active-text);
+  box-shadow: inset 3px 3px 6px var(--shadow-color-dark),
+    inset -3px -3px 6px var(--shadow-color-light);
+}
+
+.button.active:hover {
+  background-color: var(--hover-bg);
+}
+
+.button.disabled {
+  cursor: not-allowed;
+  color: var(--muted);
+  transform: scale(1);
+}
+
+#chat-links {
+  display: flex;
+  gap: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all var(--animation-duration-short) ease;
+}
+
+#chat-links.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.social-link > * {
+  width: 36px;
+  height: 36px;
+  transition: all var(--animation-long);
+}
+
+.social-link > *:hover {
+  transform: scale(1.2);
+}
+
+footer {
+  position: absolute;
+  bottom: 20px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+footer a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: all var(--animation-long);
+}
+
+footer a:hover {
+  color: var(--accent);
+}
