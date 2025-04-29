@@ -1,54 +1,58 @@
-# React + TypeScript + Vite
+# Tyler's Personal Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is my personal site—mostly a spot to share projects (like helix), my background, and ways to reach me.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Projects**: Things I've built, including the latest stuff
+- **Dark/Light Mode**: Matches your system automatically
+- **Responsive Design**: Looks good on all screens
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 19** + TypeScript
+- **Vite** for speed
+- **Firebase Hosting** for easy deployment
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Development
+
+### Setup
+
+You'll need Node.js (v18+) and npm or yarn.
+
+### Run Locally
+
+1. Clone the repo
+2. Install dependencies:
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+3. Fire up the dev server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm run dev
 ```
+
+4. Go to `http://localhost:5173`
+
+## Useful Commands
+
+- `npm run dev`: Start dev mode
+- `npm run build`: Make a production build
+- `npm run lint`: ESLint checks
+- `npm run preview`: Check production build locally
+- `npm run deploy`: Deploy to Firebase
+
+## Deployment
+
+I'm using Firebase Hosting. To deploy:
+
+```bash
+npm run deploy
+```
+
+---
+
+_Last updated: April 28, 2025_
