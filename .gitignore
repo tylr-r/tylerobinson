@@ -22,10 +22,6 @@ dist-ssr
 # Firebase cache
 .firebase/
 
-# Firebase config
-
-.firebaserc
-
 # Runtime data
 pids
 *.pid
@@ -34,9 +30,6 @@ pids
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
-
-# Dependency directories
-node_modules/
 
 # Optional npm cache directory
 .npm
@@ -54,4 +47,3 @@ node_modules/
 .env*
 
 .DS_Store
-.gitignore
