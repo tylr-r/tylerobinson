@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
+import { logEvent } from './services/firebase';
 
 interface HelixButtonProps {
   label: string;
@@ -23,6 +24,12 @@ const ToggleButton: React.FC<HelixButtonProps> = ({
 
     e.preventDefault();
     setIsActive(!isActive);
+
+    // Track button click with simplified analytics
+    logEvent('ui_click', {
+      element_type: 'button',
+      element_id: id || label,
+    });
 
     if (onClick) {
       onClick(!isActive, e);

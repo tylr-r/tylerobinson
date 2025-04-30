@@ -6,6 +6,7 @@ import ToggleButton from './ToggleButton';
 import { useEffect, useState } from 'react';
 import GithubIcon from './components/Icons/GithubIcon';
 import useSystemDarkMode from './hooks/useSystemDarkMode';
+import { logEvent } from './services/firebase';
 
 function App() {
   const [isHelixLinksActive, setIsHelixLinksActive] = useState(false);
@@ -38,6 +39,14 @@ function App() {
     };
   }, []);
 
+  // Track link clicks with generic handler
+  const handleLinkClick = (platform: string) => {
+    logEvent('ui_click', {
+      element_type: 'link',
+      element_id: platform,
+    });
+  };
+
   return (
     <>
       <div id="logo-container">
@@ -64,6 +73,7 @@ function App() {
           href="https://m.me/tylrcreative"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => handleLinkClick('messenger')}
         >
           <img src={Messenger_logo} alt="Chat Tylr on Messenger" />
         </a>
@@ -72,6 +82,7 @@ function App() {
           href="https://wa.me/message/4HK74L3CLAAVE1"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => handleLinkClick('whatsapp')}
         >
           <img src={WhatsApp_logo} alt="Chat Tylr on WhatsApp" />
         </a>
@@ -80,6 +91,7 @@ function App() {
           href="https://github.com/tylr-r/helix"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => handleLinkClick('github')}
         >
           <GithubIcon
             className="github-logo"
