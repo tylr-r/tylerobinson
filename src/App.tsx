@@ -47,6 +47,15 @@ function App() {
     });
   };
 
+  const openResume = () => {
+    window.open(
+      '/Tyler Robinson Resume 2025.pdf',
+      '_blank',
+      'noopener,noreferrer',
+    );
+    handleLinkClick('resume');
+  };
+
   return (
     <>
       <div id="logo-container">
@@ -63,7 +72,7 @@ function App() {
           id="helix-button"
           onClick={() => setIsHelixLinksActive((prevState) => !prevState)}
         />
-        <ToggleButton label="resume" id="resume-button" isDisabled />
+        <ToggleButton label="resume" id="resume-button" onClick={openResume} />
         <ToggleButton label="portfolio" id="portfolio-button" isDisabled />
       </div>
 
