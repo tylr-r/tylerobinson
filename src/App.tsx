@@ -5,6 +5,7 @@ import WhatsApp_logo from './assets/WhatsApp_logo.svg';
 import ToggleButton from './ToggleButton';
 import { useEffect, useState } from 'react';
 import GithubIcon from './components/Icons/GithubIcon';
+import useSystemDarkMode from './hooks/useSystemDarkMode';
 
 function App() {
   const [isHelixLinksActive, setIsHelixLinksActive] = useState(false);
@@ -89,26 +90,6 @@ function App() {
       <Footer />
     </>
   );
-}
-
-function useSystemDarkMode(): boolean {
-  const getPrefersDark = () =>
-    window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
-
-  const [isDarkMode, setIsDarkMode] = useState(getPrefersDark);
-
-  useEffect(() => {
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setIsDarkMode(e.matches);
-    };
-
-    media.addEventListener('change', handleChange);
-    return () => media.removeEventListener('change', handleChange);
-  }, []);
-
-  return isDarkMode;
 }
 
 export default App;
