@@ -1,39 +1,35 @@
-import React, { useState } from 'react';
 import clsx from 'clsx';
-import { logEvent } from './services/firebase';
+import React from 'react';
+import { logEvent } from '../services/firebase';
 
-interface HelixButtonProps {
+interface ToggleButtonProps {
   label: string;
   id?: string;
   href?: string;
   isDisabled?: boolean;
-  onClick?: (isActive: boolean, e: React.MouseEvent<HTMLAnchorElement>) => void;
+  isActive?: boolean;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
-const ToggleButton: React.FC<HelixButtonProps> = ({
+const ToggleButton: React.FC<ToggleButtonProps> = ({
   label,
   id,
   href,
-  isDisabled,
+  isDisabled = false,
+  isActive = false,
   onClick,
 }) => {
-  const [isActive, setIsActive] = useState(false);
-
   const handleToggle = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (isDisabled) return;
-
     e.preventDefault();
-    setIsActive(!isActive);
 
-    // Track button click with simplified analytics
+    // Log button click event
     logEvent('ui_click', {
       element_type: 'button',
       element_id: id || label,
     });
 
-    if (onClick) {
-      onClick(!isActive, e);
-    }
+    onClick?.(e);
   };
 
   return (

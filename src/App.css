@@ -12,7 +12,16 @@
   --border-color: hsla(0, 0%, 100%, 0);
   --hover-bg: hsla(0, 0%, 100%, 0.3);
 
-  /* Dark theme overrides */
+  /* Animation properties */
+  --animation-duration-long: 1.8s;
+  --animation-duration-short: 0.3s;
+  --animation-smoothness: cubic-bezier(0, 1.5, 0.31, 0.8);
+  --animation-long: var(--animation-duration-long) var(--animation-smoothness);
+  --animation-short: var(--animation-duration-short) var(--animation-smoothness);
+}
+
+/* Dark theme variables */
+:root {
   --bg-dark: hsl(240, 2%, 13%);
   --text-dark: hsl(0, 0%, 90%);
   --active-text-dark: hsl(0, 0%, 63%);
@@ -23,13 +32,6 @@
   --shadow-color-light-dark: hsla(0, 0%, 100%, 0.07);
   --glass-stroke-dark: hsla(0, 0%, 100%, 0);
   --hover-bg-dark: hsla(0, 0%, 20%, 0.5);
-
-  /* Animation properties */
-  --animation-duration-long: 1.8s;
-  --animation-duration-short: 0.3s;
-  --animation-smoothness: cubic-bezier(0, 1.5, 0.31, 0.8);
-  --animation-long: var(--animation-duration-long) var(--animation-smoothness);
-  --animation-short: var(--animation-duration-short) var(--animation-smoothness);
 }
 
 [data-theme='dark'] {
@@ -48,7 +50,6 @@
 #root {
   background-color: var(--bg);
   color: var(--text);
-  transition: background-color 0.3s ease, color 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,6 +58,7 @@
   width: 100vw;
   gap: 32px;
   padding: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #logo-container {
@@ -81,25 +83,26 @@
   color: var(--text);
 }
 
-.left-part {
-  margin-right: 2px;
+.left-part,
+.right-part {
   display: inline-block;
   transition: transform var(--animation-long);
   transform: translateX(0);
 }
 
+.left-part {
+  margin-right: 2px;
+}
+
 .right-part {
   margin-left: 3px;
-  display: inline-block;
-  transition: transform var(--animation-long);
-  transform: translateX(0);
 }
 
 #slash {
   position: absolute;
   font-weight: bold;
   margin-left: -13px;
-  transform: scale(0) translateY(-20px) translatex(30px);
+  transform: scale(0) translateY(-20px) translateX(30px);
   transform-origin: top;
   transition: transform var(--animation-duration-short)
     cubic-bezier(0, 1.29, 0.72, 0.93);
@@ -108,15 +111,15 @@
 }
 
 .animate .left-part {
-  transform: translateX(-11px) translateY(0px);
+  transform: translateX(-11px);
 }
 
 .animate .right-part {
-  transform: translateX(11px) translateY(0px);
+  transform: translateX(11px);
 }
 
 .animate #slash {
-  transform: scale(1) translateY(0) translatex(0);
+  transform: scale(1) translateY(0) translateX(0);
 }
 
 #main-tiles {
@@ -165,8 +168,20 @@
   transform: scale(1);
 }
 
-#chat-links {
+#sublinks {
   display: flex;
+  margin-top: 8px;
+  height: 50px;
+  width: 100%;
+}
+
+.links {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
   gap: 24px;
   opacity: 0;
   visibility: hidden;
@@ -174,7 +189,7 @@
   transition: all var(--animation-duration-short) ease;
 }
 
-#chat-links.visible {
+.links.visible {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
